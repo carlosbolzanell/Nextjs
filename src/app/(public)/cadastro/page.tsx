@@ -1,11 +1,12 @@
 'use client'
 import Button from '@/components/Button';
 import Input from '@/components/Input'
+import Modal from '@/components/Modal';
 import React, { useEffect, useState } from 'react'
 
 const loadList = () =>{
     const itens = localStorage.getItem('listUsers');
-    return JSON.parse(itens? itens : '[]');
+    return JSON.parse(itens || "[]");
 }
 
 const page = () => {
@@ -14,6 +15,7 @@ const page = () => {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [users, setUsers] = useState(loadList || []);
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         formatarCPF(cpf);
@@ -44,28 +46,33 @@ const page = () => {
     }
 
     const saveList = () =>{
-        const newList = [...users];
+        const newList = [...users] || null;
         localStorage.setItem('listUsers', JSON.stringify(newList));
     }
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         const user = criarUser();
-        const newUsers = users.push(user)
+        if(Object.keys(user).length === 0){
+            alert("Confira seus dados!")
+            return;
+        }
+        const newUsers = [...users, user]
         setUsers(newUsers);
+        setOpen(!open)
     }
 
     return (
-        <div className='flex flex-col justify-center items-center h-[89vh]'>
+        <div className='flex flex-col justify-center items-center h-[89vh] w-[80%] m-auto'>
             <h1 className='font-font2 text-3xl'>Cadastro</h1>
             <div className='w-[25%]'>
                 <Input label='Nome Completo' type='text' placeHolder='Digite seu nome' onChange={setName} />
             </div>
-            <div className='flex flex-row gap-[2%] max-w-[25%]'>
-                <div className='w-[49%]'>
+            <div className='flex flex-row w-[25%] gap-2'>
+                <div className='w-auto'>
                     <Input type='text' label='CPF' placeHolder='Digite seu CPF' onChange={setCpf} value={cpf} maxLength={14} />
                 </div>
-                <div className='w-[49%]'>
+                <div className='w-auto'>
                     <Input label='E-mail' type='email' placeHolder='exemplo@email.com' onChange={setEmail} />
                 </div>
             </div>
@@ -75,6 +82,13 @@ const page = () => {
             <div className='w-[15%] h-8 mt-3'>
                 <Button texto='Cadastrar' onClick={handleClick} />
             </div>
+            {
+                open &&(
+                    <div className='absolute top-1/2'>
+                        <Modal text='Cadastro realizado' textButton='OK' caminho='login'/>
+                    </div>
+                )
+            }
         </div>
     )
 }
