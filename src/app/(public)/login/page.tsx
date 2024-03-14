@@ -22,22 +22,21 @@ export default function loginPage(){
 
     const conferirLogin = () =>{
         const users = loadList();
-        const user = users.map((user: userType)=>{
-            if(user.email == email && user.senha == senha){
-                return user;
-            }
+        const user = users.filter((user: userType)=>{
+            return user.email == email && user.senha == senha
         })
-        return (user? user : {})
+        return (user)
     }
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) =>{
         e.preventDefault()
-        const userLogado = conferirLogin(); 
-        if(Object.keys(userLogado).length === 0){
-            alert("Informações erradas")
-            return
+        const userLogado = conferirLogin();
+        if(userLogado.length === 1){
+            router.push('clientes')
+        }else{
+            alert("Dados incorretos")
         }
-        router.push('clientes')
+        
     }
     return(
         <div className="h-[80vh] flex items-center justify-center">
