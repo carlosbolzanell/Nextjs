@@ -32,7 +32,7 @@ export default function loginPage(){
         e.preventDefault()
         const userLogado = conferirLogin();
         if(userLogado.length === 1){
-            router.push('clientes')
+            router.push('paginaInicial', userLogado)
         }else{
             alert("Dados incorretos")
         }
