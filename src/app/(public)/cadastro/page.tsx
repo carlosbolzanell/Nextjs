@@ -63,23 +63,23 @@ const page = () => {
     }
 
     return (
-        <div className='flex flex-col justify-center items-center h-[89vh] w-[80%] m-auto'>
+        <div className='flex flex-col justify-center items-center h-[89vh]'>
             <h1 className='font-font2 text-3xl'>Cadastro</h1>
-            <div className='w-[25%]'>
+            <div className='w-80'>
                 <Input label='Nome Completo' type='text' placeHolder='Digite seu nome' onChange={setName} />
             </div>
-            <div className='flex flex-row w-[25%] gap-2'>
-                <div className='w-auto'>
+            <div className='flex flex-row gap-2 w-80'>
+                <div className='w-[9.75rem]'>
                     <Input type='text' label='CPF' placeHolder='Digite seu CPF' onChange={setCpf} value={cpf} maxLength={14} />
                 </div>
-                <div className='w-auto'>
+                <div className='w-[9.75rem]'>
                     <Input label='E-mail' type='email' placeHolder='exemplo@email.com' onChange={setEmail} />
                 </div>
             </div>
-            <div className='w-[25%]'>
+            <div className='w-80'>
                 <Input label='Senha' type='password' placeHolder='Sua senha' onChange={setSenha} />
             </div>
-            <div className='w-[15%] h-8 mt-3'>
+            <div className='w-20 h-8 mt-3'>
                 <Button texto='Cadastrar' onClick={handleClick} />
             </div>
             {

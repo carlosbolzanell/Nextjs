@@ -42,7 +42,7 @@ export default function loginPage(){
         <div className="h-[80vh] flex items-center justify-center">
             <form action="" className="flex flex-col gap-3">
                 <div className="flex flex-col gap-1">
-                    <Input label="Login" type="text" placeHolder="Digite seu login" onChange={setEmail}/>
+                    <Input label="Login" type="text" placeHolder="Digite seu email" onChange={setEmail}/>
                     <Input label="Senha" type="password" placeHolder="Digite sua senha" onChange={setSenha} /> 
                 </div>
                 <Button onClick={handleClick} texto="Enviar"/>
