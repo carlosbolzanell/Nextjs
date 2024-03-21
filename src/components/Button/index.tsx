@@ -7,6 +7,6 @@ interface ButtonProps {
 
 export default function Button({texto, onClick}: ButtonProps){
     return(
-        <button onClick={onClick} type="submit" className="border border-black rounded-md font-font1 bg-blue-100 w-full h-full">{texto}</button>
+        <button onClick={onClick} type="submit" className="border border-black rounded-md font-font1 bg-blue-100 w-full h-full hover:bg-sky-300 duration-200">{texto}</button>
     )
 }
