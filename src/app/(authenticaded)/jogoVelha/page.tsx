@@ -7,9 +7,8 @@ export default function jogoVelha() {
     const [player1, setPlayer1] = useState("");
     const [player2, setPlayer2] = useState("");
     const [hasNomes, setHasNomes] = useState(false)
-    //if(hasNomes) return <Jogo player1={player1} player2={player2}/>
-    //return <Menu setHasNomes={setHasNomes} setPlayer1={setPlayer1} setPlayer2={setPlayer2} player1={player1} player2={player2}/>;
-    return <Jogo player1={"a"} player2={"b"} />
+    if(hasNomes) return <Jogo player1={player1} player2={player2}/>
+    return <Menu setHasNomes={setHasNomes} setPlayer1={setPlayer1} setPlayer2={setPlayer2} player1={player1} player2={player2}/>;
 }
 type TypeMenu = {
     setHasNomes: React.Dispatch<React.SetStateAction<boolean>>,
@@ -56,6 +55,7 @@ const tabuleiro = [
 const Jogo = ({ player1, player2 }: JogoType) => {
     const [tabuleiroJogo, setTabuleiroJogo] = useState([[...tabuleiro[0]],[...tabuleiro[1]],[...tabuleiro[2]]]);
     const [playerVez, setPlayerVez] = useState(player1)
+    const [empate, setEmpate] = useState(false);
     const [vencedor, setVencedor] = useState(false);
 
     useEffect(()=>{
@@ -110,8 +110,7 @@ const Jogo = ({ player1, player2 }: JogoType) => {
             })
         })
         if(contEmpate == 9 && !vencedorTemporario){
-            setPlayerVez("Empatado");
-            setVencedor(true);
+            setEmpate(true);
         }
 
     }
@@ -139,11 +138,11 @@ const Jogo = ({ player1, player2 }: JogoType) => {
 
     const mensagem = () =>{
         if(!vencedor){
+            if(empate){
+                return ("Deu velha!")
+            }
             return("Vez de " + playerVez)
         }else{
-            if(playerVez === "Empatado"){
-                return("Deu velha!")
-            }
             return((playerVez == player1? player2 : player1)+ " Venceu!")
         }
     }
@@ -151,13 +150,14 @@ const Jogo = ({ player1, player2 }: JogoType) => {
         setTabuleiroJogo(tabuleiro)
         setPlayerVez(playerVez)
         setVencedor(false)
+        setEmpate(false)
     }
     return (
-        <div className={`flex flex-col justify-center items-center h-[89vh] duration-100 ${(vencedor && mensagem() != "Deu velha!" ? (playerVez == player1 ? "bg-sky-300":"bg-red-200"): "bg-white")}`}>
+        <div className={`flex flex-col justify-center items-center h-[89vh] duration-100 ${(vencedor ? (playerVez == player1 ? "bg-sky-300":"bg-red-200"): "bg-white")}`}>
             <p className='font-font2 text-2xl mb-3'>{mensagem()}</p>
             {renderTabuleiro()}
-            {vencedor &&(
-                <button className={`absolute bottom-14 align-middle font-font1 font-bold text-center uppercase transition-all text-xs py-3 px-6 rounded-lg ${(vencedor && mensagem() != "Deu velha!" ? (playerVez == player1 ? "bg-red-200 text-black": "bg-sky-300 text-black"): "bg-gray-500 text-white")} shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none`} onClick={()=>zerarGame()}>Reiniciar</button>
+            {(vencedor || empate) &&(
+                <button className={`absolute bottom-10 align-middle font-font1 font-bold text-center uppercase transition-all text-xs py-3 px-6 rounded-lg ${(vencedor ? (playerVez == player1 ? "bg-red-200 text-black": "bg-sky-300 text-black"): "bg-gray-500 text-white")} shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none`} onClick={()=>zerarGame()}>Reiniciar</button>
             )} 
         </div>
     )
