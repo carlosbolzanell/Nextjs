@@ -14,7 +14,7 @@ type userType = {
     senha: string
 }
 
-export default function loginPage(){
+export default function LoginPage(){
     const router = useRouter();
 
     const [email, setEmail] = useState("");

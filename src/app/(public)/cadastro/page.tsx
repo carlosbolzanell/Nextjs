@@ -9,7 +9,7 @@ const loadList = () =>{
     return JSON.parse(itens || "[]");
 }
 
-const page = () => {
+const Page = () => {
     const [name, setName] = useState("");
     const [cpf, setCpf] = useState("");
     const [email, setEmail] = useState("");
@@ -93,4 +93,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

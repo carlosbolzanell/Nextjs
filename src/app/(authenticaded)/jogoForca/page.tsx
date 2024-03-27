@@ -3,7 +3,7 @@ import Button from '@/components/Button'
 import Input from '@/components/Input'
 import React, { useEffect, useState } from 'react'
 
-function jogoForca() {
+function JogoForca() {
     const [palavra, setPalavra] = useState("")
     const [isPalavra, setIsPalavra] = useState(false)
     if (isPalavra) return <Jogo palavra={palavra} />
@@ -122,4 +122,4 @@ const Jogo = ({ palavra }: jogoType) => {
     )
 }
 
-export default jogoForca
+export default JogoForca

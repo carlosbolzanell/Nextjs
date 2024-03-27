@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 
-export default function jogoVelha() {
+export default function JogoVelha() {
     const [player1, setPlayer1] = useState("");
     const [player2, setPlayer2] = useState("");
     const [hasNomes, setHasNomes] = useState(false)
