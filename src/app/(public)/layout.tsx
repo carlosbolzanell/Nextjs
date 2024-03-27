@@ -1,5 +1,6 @@
 import HeaderDeslogado from "@/components/HeaderDeslogado";
 import "../globals.css";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata = {
   title: 'Login',
@@ -16,6 +17,7 @@ export default function RootLayout({
       <body>
         <HeaderDeslogado />
         {children}
+        <SpeedInsights />
       </body>
     </html>
   )

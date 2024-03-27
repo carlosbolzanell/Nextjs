@@ -1,10 +1,7 @@
 import HeaderLogado from "@/components/HeaderLogado";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import Link from "next/link";
 import "../globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
   title: "Nextjs",
@@ -21,6 +18,7 @@ export default function RootLayout({
       <body className="h-screen">
         <HeaderLogado />
         {children}
+        <SpeedInsights />
       </body>
     </html>
   );
